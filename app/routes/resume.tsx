@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router'
+import ATS from '~/components/ATS'
+import Details from '~/components/details'
+import Summary from '~/components/summary'
 import { usePuterStore } from '~/lib/puter'
 
 export const meta =() => ([
@@ -12,7 +15,7 @@ const Resume = () => {
     const {id} = useParams()
     const [imageUrl, setImageUrl] = useState('')
     const [resumeUrl, setResumeUrl] = useState('')
-    const [feedback, setFeedback] = useState('')
+    const [feedback, setFeedback] = useState<Feedback | null>(null)
 
     const navigate = useNavigate()
 
@@ -73,7 +76,9 @@ const Resume = () => {
                 {
                     feedback ? (
                         <div className='flex flex-col gap-8 animate-in fade-in duration-1000'>
-                            Summary ATS Details
+                            <Summary feedback={feedback} />
+                            {/* <ATS score={feedback.ATS.score || 0} suggestions={feedback.padStart.tips || []}/>
+                            <Details feedback={feedback} /> */}
                         </div>
                     ) : (
                         <div>
